@@ -5,9 +5,11 @@ import entity.Shark;
 public class EventProducer {
 
     public void startSimulation(Shark shark) {
+        int energy = shark.getEnergy();
+        int health = shark.getHealth();
+        System.out.println("Привет, мы начинаем симуляцию жизни акулы в море!"+ returnEnergyHealthLevel(energy, health));
         while (isAlive(shark)) {
             int eventPercentage = (int) (Math.random() * 100);
-
             if (eventPercentage >= 0 && eventPercentage <= 40) {
                 sleep(shark);
             } else if (eventPercentage > 40 && eventPercentage <= 45) {
@@ -31,6 +33,7 @@ public class EventProducer {
             }
 
         }
+        System.out.println("Ооо нет! Акула умерла! Симуляция окончена.");
     }
 
     private String returnEnergyHealthLevel(int e, int h) {
