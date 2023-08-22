@@ -4,8 +4,33 @@ import entity.Shark;
 
 public class EventProducer {
 
-    public void activeEvent() {
+    public void startSimulation(Shark shark) {
+        while (isAlive(shark)) {
+            int eventPercentage = (int) (Math.random() * 100);
 
+            if (eventPercentage >= 0 && eventPercentage <= 40) {
+                sleep(shark);
+            } else if (eventPercentage > 40 && eventPercentage <= 45) {
+                eatFish(shark);
+            } else if (eventPercentage > 45 && eventPercentage <= 50) {
+                eatSquid(shark);
+            } else if (eventPercentage > 50 && eventPercentage <= 55) {
+                eatSeaweedPlankton(shark);
+            } else if (eventPercentage > 55 && eventPercentage <= 60) {
+                eatTrash(shark);
+            } else if (eventPercentage > 60 && eventPercentage <= 86) {
+                searchPray(shark);
+            } else if (eventPercentage > 86 && eventPercentage <= 94) {
+                migrate(shark);
+            } else if (eventPercentage > 94 && eventPercentage <= 96) {
+                spawn(shark);
+            } else if (eventPercentage > 96 && eventPercentage <= 98) {
+                breakFreeFromHook(shark);
+            } else {
+                battlePoacher(shark);
+            }
+
+        }
     }
 
     private String returnEnergyHealthLevel(int e, int h) {
@@ -52,7 +77,7 @@ public class EventProducer {
     private void eatSquid(Shark shark) {
         int energy = shark.getEnergy();
         int health = shark.getHealth();
-        energy = Math.max (energy-2,0);
+        energy = Math.max(energy - 2, 0);
         health += (int) (2 * shark.getHealthRecoveryRate());
         shark.setEnergy(energy);
         shark.setHealth(health);
@@ -64,7 +89,7 @@ public class EventProducer {
     private void eatSeaweedPlankton(Shark shark) {
         int energy = shark.getEnergy();
         int health = shark.getHealth();
-        energy =Math.max(energy-1,0);
+        energy = Math.max(energy - 1, 0);
         health += (int) (0.1 * shark.getHealthRecoveryRate());
         shark.setEnergy(energy);
         shark.setHealth(health);
@@ -76,7 +101,7 @@ public class EventProducer {
     private void eatTrash(Shark shark) {
         int energy = shark.getEnergy();
         int health = shark.getHealth();
-        energy =Math.max(energy-15,0);
+        energy = Math.max(energy - 15, 0);
         health -= (int) (5 * shark.getHealthRecoveryRate());
         shark.setEnergy(energy);
         shark.setHealth(health);
@@ -88,7 +113,7 @@ public class EventProducer {
     private void searchPray(Shark shark) {
         int energy = shark.getEnergy();
         int health = shark.getHealth();
-        energy = Math.max (energy-4,0);
+        energy = Math.max(energy - 4, 0);
         shark.setEnergy(energy);
         checkAndSetMinEnergyMaxHealth(shark);
         System.out.println("Акула плывёт в посиках добычи." + returnEnergyHealthLevel(energy, health));
@@ -99,7 +124,7 @@ public class EventProducer {
     private void migrate(Shark shark) {
         int energy = shark.getEnergy();
         int health = shark.getHealth();
-        energy = Math.max(energy-6,0);
+        energy = Math.max(energy - 6, 0);
         shark.setEnergy(energy);
         checkAndSetMinEnergyMaxHealth(shark);
         System.out.println("Акула мигрирует в стае." + returnEnergyHealthLevel(energy, health));
@@ -119,7 +144,7 @@ public class EventProducer {
     private void breakFreeFromHook(Shark shark) {
         int energy = shark.getEnergy();
         int health = shark.getHealth();
-        energy = Math.max(energy-20,0);
+        energy = Math.max(energy - 20, 0);
         checkAndSetMinEnergyMaxHealth(shark);
         health -= 10;
         shark.setEnergy(energy);
@@ -131,7 +156,7 @@ public class EventProducer {
     private void battlePoacher(Shark shark) {
         int energy = shark.getEnergy();
         int health = shark.getHealth();
-        energy = Math.max (energy - 40, 0);
+        energy = Math.max(energy - 40, 0);
         checkAndSetMinEnergyMaxHealth(shark);
         health -= 40;
         shark.setEnergy(energy);
