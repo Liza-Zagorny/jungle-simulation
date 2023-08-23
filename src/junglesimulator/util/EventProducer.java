@@ -50,7 +50,8 @@ public class EventProducer {
             }
 
         }
-        System.out.println("Ооо нет! Акула умерла прожив всего " + (day - 1) + " дней! Симуляция окончена.");
+
+        System.out.println("Ооо нет! Акула умерла на " + (day - 1) + "-й день! Симуляция окончена.");
     }
 
     private String returnEnergyHealthLevel(int e, int h) {
@@ -115,7 +116,7 @@ public class EventProducer {
     }
 
     // 5. Акула ест отходы: пластик, стекло, метал (eatTrash): Тратит 15 единиц энергии и теряет 5*коэфф здоровья.
-    // C 10% шансом у акулы случается осложнение после поедания отходов и она тут же умирает.
+    // C 5% шансом у акулы случается осложнение после поедания отходов и она тут же умирает.
     private void eatTrash(Shark shark) {
         int energy = shark.getEnergy();
         int health = shark.getHealth();
@@ -127,7 +128,7 @@ public class EventProducer {
         System.out.println("Акула попыталась съесть мусор." + returnEnergyHealthLevel(energy, updHealth));
 
         double eventPercentage = Math.random();
-        if (eventPercentage >= 0.9) {
+        if (eventPercentage > 0.95) {
             shark.setHealth(0);
             System.out.println("К сожалению, акула подавилась мусором и умерла.");
 
