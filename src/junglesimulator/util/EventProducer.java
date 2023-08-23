@@ -8,32 +8,50 @@ public class EventProducer {
         int energy = shark.getEnergy();
         int health = shark.getHealth();
         System.out.println("Привет, мы начинаем симуляцию жизни акулы в море!" + returnEnergyHealthLevel(energy, health));
+        int day = 1;
+
+        int eventOfTheDay = 0;
         while (isAlive(shark)) {
+            if (eventOfTheDay == 4 || (day == 1 && eventOfTheDay == 0)) {
+                eventOfTheDay = 0;
+                System.out.println("Начался день " + day + ":");
+                day++;
+            }
             int eventPercentage = (int) (Math.random() * 100);
             if (eventPercentage >= 0 && eventPercentage <= 20) {
                 sleep(shark);
+                eventOfTheDay++;
             } else if (eventPercentage > 20 && eventPercentage <= 25) {
                 eatFish(shark);
+                eventOfTheDay++;
             } else if (eventPercentage > 25 && eventPercentage <= 35) {
                 eatSquid(shark);
+                eventOfTheDay++;
             } else if (eventPercentage > 35 && eventPercentage <= 45) {
                 eatSeaweedPlankton(shark);
+                eventOfTheDay++;
             } else if (eventPercentage > 45 && eventPercentage <= 50) {
                 eatTrash(shark);
+                eventOfTheDay++;
             } else if (eventPercentage > 50 && eventPercentage <= 85) {
                 searchPray(shark);
+                eventOfTheDay++;
             } else if (eventPercentage > 85 && eventPercentage <= 95) {
                 migrate(shark);
+                eventOfTheDay++;
             } else if (eventPercentage > 95 && eventPercentage <= 97) {
                 spawn(shark);
+                eventOfTheDay++;
             } else if (eventPercentage > 97 && eventPercentage <= 99) {
                 breakFreeFromHook(shark);
+                eventOfTheDay++;
             } else {
                 battlePoacher(shark);
+                eventOfTheDay++;
             }
 
         }
-        System.out.println("Ооо нет! Акула умерла! Симуляция окончена.");
+        System.out.println("Ооо нет! Акула умерла прожив всего "+(day-1)+" дней! Симуляция окончена.");
     }
 
     private String returnEnergyHealthLevel(int e, int h) {
