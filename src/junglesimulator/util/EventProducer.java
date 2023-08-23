@@ -10,23 +10,23 @@ public class EventProducer {
         System.out.println("Привет, мы начинаем симуляцию жизни акулы в море!" + returnEnergyHealthLevel(energy, health));
         while (isAlive(shark)) {
             int eventPercentage = (int) (Math.random() * 100);
-            if (eventPercentage >= 0 && eventPercentage <= 40) {
+            if (eventPercentage >= 0 && eventPercentage <= 20) {
                 sleep(shark);
-            } else if (eventPercentage > 40 && eventPercentage <= 45) {
+            } else if (eventPercentage > 20 && eventPercentage <= 25) {
                 eatFish(shark);
-            } else if (eventPercentage > 45 && eventPercentage <= 50) {
+            } else if (eventPercentage > 25 && eventPercentage <= 35) {
                 eatSquid(shark);
-            } else if (eventPercentage > 50 && eventPercentage <= 55) {
+            } else if (eventPercentage > 35 && eventPercentage <= 45) {
                 eatSeaweedPlankton(shark);
-            } else if (eventPercentage > 55 && eventPercentage <= 60) {
+            } else if (eventPercentage > 45 && eventPercentage <= 50) {
                 eatTrash(shark);
-            } else if (eventPercentage > 60 && eventPercentage <= 86) {
+            } else if (eventPercentage > 50 && eventPercentage <= 85) {
                 searchPray(shark);
-            } else if (eventPercentage > 86 && eventPercentage <= 94) {
+            } else if (eventPercentage > 85 && eventPercentage <= 95) {
                 migrate(shark);
-            } else if (eventPercentage > 94 && eventPercentage <= 96) {
+            } else if (eventPercentage > 95 && eventPercentage <= 97) {
                 spawn(shark);
-            } else if (eventPercentage > 96 && eventPercentage <= 98) {
+            } else if (eventPercentage > 97 && eventPercentage <= 99) {
                 breakFreeFromHook(shark);
             } else {
                 battlePoacher(shark);
