@@ -9,7 +9,6 @@ public class EventProducer {
         int health = shark.getHealth();
         System.out.println("Привет, мы начинаем симуляцию жизни акулы в море!" + returnEnergyHealthLevel(energy, health));
         int day = 1;
-
         int eventOfTheDay = 0;
         while (isAlive(shark)) {
             if (eventOfTheDay == 4 || (day == 1 && eventOfTheDay == 0)) {
@@ -51,7 +50,7 @@ public class EventProducer {
             }
 
         }
-        System.out.println("Ооо нет! Акула умерла прожив всего "+(day-1)+" дней! Симуляция окончена.");
+        System.out.println("Ооо нет! Акула умерла прожив всего " + (day - 1) + " дней! Симуляция окончена.");
     }
 
     private String returnEnergyHealthLevel(int e, int h) {
@@ -116,6 +115,7 @@ public class EventProducer {
     }
 
     // 5. Акула ест отходы: пластик, стекло, метал (eatTrash): Тратит 15 единиц энергии и теряет 5*коэфф здоровья.
+    // C 10% шансом у акулы случается осложнение после поедания отходов и она тут же умирает.
     private void eatTrash(Shark shark) {
         int energy = shark.getEnergy();
         int health = shark.getHealth();
@@ -125,6 +125,13 @@ public class EventProducer {
         int updHealth = checkMinEnergyUpdateHealth(energy, health);
         shark.setHealth(updHealth);
         System.out.println("Акула попыталась съесть мусор." + returnEnergyHealthLevel(energy, updHealth));
+
+        double eventPercentage = Math.random();
+        if (eventPercentage >= 0.9) {
+            shark.setHealth(0);
+            System.out.println("К сожалению, акула подавилась мусором и умерла.");
+
+        }
     }
 
     // 6. Акула плывет в посиках добычи (searchPray) Тратит 4 единицы энергии.
@@ -173,12 +180,12 @@ public class EventProducer {
         System.out.println("Акула сорвалась с крючка рыболова." + returnEnergyHealthLevel(energy, updHealth));
     }
 
-    // 10. Акула сражается с браконьером (battlePoacher) Тратит 40 единиц энергии и 40 здоровья.
+    // 10. Акула сражается с браконьером (battlePoacher) Тратит 50 единиц энергии и 80 здоровья.
     private void battlePoacher(Shark shark) {
         int energy = shark.getEnergy();
         int health = shark.getHealth();
-        energy = Math.max(energy - 40, 0);
-        health -= 40;
+        energy = Math.max(energy - 50, 0);
+        health -= 80;
         shark.setEnergy(energy);
         int updHealth = checkMinEnergyUpdateHealth(energy, health);
         shark.setHealth(updHealth);
