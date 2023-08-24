@@ -48,8 +48,12 @@ public class EventProducer {
                 battlePoacher(shark);
                 eventOfTheDay++;
             }
+            try{
+                Thread.sleep(1000);
+            } catch (InterruptedException e){
+                throw new RuntimeException();
+            }
         }
-
         System.out.println("Ооо нет! Акула умерла на " + (day - 1) + "-й день! Симуляция окончена.");
     }
 
@@ -148,7 +152,7 @@ public class EventProducer {
         System.out.println("Акула плыла разыскивая добычу." + returnEnergyHealthLevel(energy, updHealth));
     }
 
-// 7. Акула мигрирует в стае (migrate) Тратит 6 единиц энергии.
+    // 7. Акула мигрирует в стае (migrate) Тратит 6 единиц энергии.
     private void migrate(Shark shark) {
         int energy = shark.getEnergy();
         int health = shark.getHealth();
