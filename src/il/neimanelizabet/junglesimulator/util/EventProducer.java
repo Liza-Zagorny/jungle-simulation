@@ -48,7 +48,6 @@ public class EventProducer {
                 battlePoacher(shark);
                 eventOfTheDay++;
             }
-
         }
 
         System.out.println("Ооо нет! Акула умерла на " + (day - 1) + "-й день! Симуляция окончена.");
@@ -59,15 +58,20 @@ public class EventProducer {
     }
 
     private boolean isAlive(Shark shark) {
-        int health = shark.getHealth();
-        return health > 0;
+        return shark.getHealth() > 0;
     }
 
-    private int checkMinEnergyUpdateHealth(int e, int h) {
-        if (e == 0) h -= 5;
-        if (h > 100) h = 100;
-        if (h < 0) h = 0;
-        return h;
+    private int checkMinEnergyUpdateHealth(int energy, int health) {
+        if (energy == 0) {
+            health -= 5;
+        }
+        if (health > 100) {
+            health = 100;
+        }
+        if (health < 0) {
+            health = 0;
+        }
+        return health;
     }
 
     // 1. Акула спит (sleep): Возобновляется 20 энергии.
@@ -126,12 +130,10 @@ public class EventProducer {
         int updHealth = checkMinEnergyUpdateHealth(energy, health);
         shark.setHealth(updHealth);
         System.out.println("Акула попыталась съесть мусор." + returnEnergyHealthLevel(energy, updHealth));
-
         double eventPercentage = Math.random();
         if (eventPercentage > 0.95) {
             shark.setHealth(0);
             System.out.println("К сожалению, акула подавилась мусором и умерла.");
-
         }
     }
 
@@ -147,7 +149,6 @@ public class EventProducer {
     }
 
 // 7. Акула мигрирует в стае (migrate) Тратит 6 единиц энергии.
-
     private void migrate(Shark shark) {
         int energy = shark.getEnergy();
         int health = shark.getHealth();
